@@ -35,7 +35,7 @@ cat <<EOF > /var/www/html/index.html
 <title>EC2 Instance Meta-Data</title>
 </head>
 <body>
-<h1>Instance Information</h1>
+<h1>Instance Information - WEB </h1>
 <p>Instance ID: ${INSTANCE_ID}</p>
 <p>Availability Zone: ${AVAILABILITY_ZONE}</p>
 <p>Subnet ID: ${SUBNET_ID}</p>

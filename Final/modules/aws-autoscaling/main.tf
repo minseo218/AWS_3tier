@@ -1,9 +1,12 @@
+
 # Creating Launch template for Web tier AutoScaling Group
 resource "aws_launch_template" "Web-LC" {
   name = var.launch-template-name1
   image_id = data.aws_ami.ami.image_id
   instance_type = "t2.micro"
-
+  iam_instance_profile {
+    name = data.aws_iam_instance_profile.instance-profile.name
+  }
   vpc_security_group_ids = [data.aws_security_group.web-sg.id]
 
   user_data = filebase64("./modules/aws-autoscaling/web.sh")
@@ -15,7 +18,6 @@ resource "aws_autoscaling_group" "Web-ASG" {
   launch_template {
     id = aws_launch_template.Web-LC.id
     version = aws_launch_template.Web-LC.latest_version
-
   }
   min_size             = 2
   max_size             = 4
@@ -94,6 +96,9 @@ resource "aws_launch_template" "Was-LC" {
   name = var.launch-template-name2
   image_id = data.aws_ami.ami.image_id
   instance_type = "t2.micro"
+  iam_instance_profile {
+    name = data.aws_iam_instance_profile.instance-profile.name
+  }
 
   vpc_security_group_ids = [data.aws_security_group.was-sg.id]
 
@@ -106,7 +111,6 @@ resource "aws_autoscaling_group" "Was-ASG" {
   launch_template {
     id = aws_launch_template.Was-LC.id
     version = aws_launch_template.Was-LC.latest_version
-
   }
   min_size             = 2
   max_size             = 4

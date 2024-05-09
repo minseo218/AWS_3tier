@@ -4,5 +4,5 @@ data "aws_route53_zone" "zone" {
 }
 
 # data "aws_acm_certificate" "cert" {
-#   domain = var.domain-name 
+#   domain = var.domain-name
 # }

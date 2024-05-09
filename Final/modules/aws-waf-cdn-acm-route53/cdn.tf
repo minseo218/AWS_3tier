@@ -53,5 +53,5 @@ resource "aws_cloudfront_distribution" "cdn-web-elb-distribution" {
     Name = var.cdn-name
   }
 
-  depends_on = [aws_acm_certificate_validation.cert]
+#  depends_on = [aws_acm_certificate_validation.cert]
 }

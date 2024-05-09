@@ -9,8 +9,8 @@ terraform {
 }
 
 provider "aws" {
-  #alias  = "sydeny"
-  region = "ap-southeast-2"
+  #alias  = "singapore"
+  region = "ap-southeast-1"
 }
 
 provider "aws" { // waf는 버지니아에서만 가능 

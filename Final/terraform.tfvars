@@ -48,9 +48,11 @@ WEB-ALB-NAME = "Web-elb"
 WAS-ALB-NAME = "Was-elb"
 
 # IAM
-IAM-ROLE              = "iam-role-for-ec2-SSM-kms"
-IAM-POLICY            = "iam-policy-for-ec2-SSM-kms"
-INSTANCE-PROFILE-NAME = "iam-instance-profile-for-ec2-SSM-kms"
+IAM-ROLE              = "iam-role-for-ec2-SSM-s3-cw-cd-kms"
+IAM-POLICY            = "iam-policy-for-ec2-SSM-s3-cw-cd-kms"
+INSTANCE-PROFILE-NAME = "iam-instance-profile-for-ec2-SSM-s3-cw-cd-kms"
+
+
 
 # AUTOSCALING
 AMI-NAME              = "New-AMI"
