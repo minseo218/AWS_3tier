@@ -33,13 +33,16 @@ WAS-SG-NAME     = "3-Tier-was-sg"
 DB-SG-NAME      = "3-Tier-db-sg"
 
 # RDS
-SG-NAME1     = "sg-3-tier-rds1" #subnetgroup
-SG-NAME2     = "sg-3-tier-rds2"
-RDS-USERNAME = "admin"
-RDS-PWD      = "Admin1234"
-DB-NAME      = "mydb"
-RDS1-NAME    = "3-Tier-RDS1"
-RDS2-NAME    = "3-Tier-RDS2"
+SG-NAME1 = "sg-3-tier-rds1" #subnetgroup
+SG-NAME2 = "sg-3-tier-rds2"
+#RDS-USERNAME = "admin"
+#RDS-PWD      = "Admin1234"
+DB-NAME   = "demo"
+RDS1-NAME = "3-Tier-RDS1"
+RDS2-NAME = "3-Tier-RDS2"
+
+
+
 
 # ALB
 WEB-TG-NAME  = "Web-TG"

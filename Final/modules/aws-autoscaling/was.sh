@@ -32,10 +32,10 @@ SUBNET_ID=$(curl -H "X-aws-ec2-metadata-token: ${TOKEN}" http://169.254.169.254/
 cat <<EOF > /var/www/html/index.html
 <html>
 <head>
-<title>EC2 Instance Meta-Data WAS</title>
+<title>EC2 Instance Meta-Data</title>
 </head>
 <body>
-<h1>Instance Information - WEB </h1>
+<h1>Instance Information</h1>
 <p>Instance ID: ${INSTANCE_ID}</p>
 <p>Availability Zone: ${AVAILABILITY_ZONE}</p>
 <p>Subnet ID: ${SUBNET_ID}</p>

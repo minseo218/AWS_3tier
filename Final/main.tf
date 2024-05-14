@@ -74,12 +74,12 @@ module "aws-rds" {
   private2-subnet-name1 = var.PRIVATE2-SUBNET1
   private2-subnet-name2 = var.PRIVATE2-SUBNET2
   db-sg-name            = var.DB-SG-NAME
-  rds-username          = var.RDS-USERNAME
-  rds-pwd               = var.RDS-PWD
-  db-name               = var.DB-NAME
-  rds1-name             = var.RDS1-NAME
-  rds2-name             = var.RDS2-NAME
-  depends_on            = [module.security-group]
+  #  rds-username          = var.RDS-USERNAME
+  #  rds-pwd               = var.RDS-PWD
+  db-name    = var.DB-NAME
+  rds1-name  = var.RDS1-NAME
+  rds2-name  = var.RDS2-NAME
+  depends_on = [module.security-group]
 }
 
 module "alb" {
@@ -109,25 +109,43 @@ module "iam" {
   depends_on = [module.alb]
 }
 
-module "autoscaling" {
-  source                = "./modules/aws-autoscaling"
-  ami_name              = var.AMI-NAME
-  launch-template-name1 = var.LAUNCH-TEMPLATE-NAME1
-  launch-template-name2 = var.LAUNCH-TEMPLATE-NAME2
-  instance-profile-name = var.INSTANCE-PROFILE-NAME
-  web-sg-name           = var.WEB-SG-NAME
-  was-sg-name           = var.WAS-SG-NAME
-  web-tg-name           = var.WEB-TG-NAME
-  was-tg-name           = var.WAS-TG-NAME
-  iam-role              = var.IAM-ROLE
+#module "autoscaling" {
+#  source                = "./modules/aws-autoscaling"
+#  ami_name              = var.AMI-NAME
+#  launch-template-name1 = var.LAUNCH-TEMPLATE-NAME1
+#  launch-template-name2 = var.LAUNCH-TEMPLATE-NAME2
+#  instance-profile-name = var.INSTANCE-PROFILE-NAME
+#  web-sg-name           = var.WEB-SG-NAME
+#  was-sg-name           = var.WAS-SG-NAME
+#  web-tg-name           = var.WEB-TG-NAME
+#  was-tg-name           = var.WAS-TG-NAME
+#  iam-role              = var.IAM-ROLE
+#  public-subnet-name1   = var.PUBLIC-SUBNET1
+#  public-subnet-name2   = var.PUBLIC-SUBNET2
+#  private1-subnet-name1 = var.PRIVATE1-SUBNET1
+#  private1-subnet-name2 = var.PRIVATE1-SUBNET2
+#  asg-name1             = var.ASG-NAME1
+#  asg-name2             = var.ASG-NAME2
+#
+#  depends_on = [module.iam]
+#}
+
+module "ecs-fargate" {
+  source                = "./modules/aws-ecs-fargate"
   public-subnet-name1   = var.PUBLIC-SUBNET1
   public-subnet-name2   = var.PUBLIC-SUBNET2
   private1-subnet-name1 = var.PRIVATE1-SUBNET1
   private1-subnet-name2 = var.PRIVATE1-SUBNET2
-  asg-name1             = var.ASG-NAME1
-  asg-name2             = var.ASG-NAME2
-
-  depends_on = [module.iam]
+  web-alb-sg-name       = var.WEB-ALB-SG-NAME
+  was-alb-sg-name       = var.WAS-ALB-SG-NAME
+  web-alb-name          = var.WEB-ALB-NAME
+  was-alb-name          = var.WAS-ALB-NAME
+  web-tg-name           = var.WEB-TG-NAME
+  was-tg-name           = var.WAS-TG-NAME
+  vpc-name              = var.VPC-NAME
+  web-sg-name     = var.WEB-SG-NAME
+  was-sg-name     = var.WAS-SG-NAME
+  depends_on = [module.alb]
 }
 
 module "route53" {

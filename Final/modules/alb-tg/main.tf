@@ -24,7 +24,7 @@ resource "aws_lb_target_group" "web-tg" {
     healthy_threshold   = 5
     unhealthy_threshold = 2
   }
-  target_type = "instance"
+  target_type = "ip"
   port     = 80
   protocol = "HTTP"
   vpc_id   = data.aws_vpc.vpc.id
@@ -80,7 +80,7 @@ resource "aws_lb_target_group" "was-tg" {
     healthy_threshold   = 5
     unhealthy_threshold = 2
   }
-  target_type = "instance"
+  target_type = "ip"
   port     = 80
   protocol = "HTTP"
   vpc_id   = data.aws_vpc.vpc.id

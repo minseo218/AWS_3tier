@@ -28,14 +28,14 @@ AVAILABILITY_ZONE=$(curl -H "X-aws-ec2-metadata-token: ${TOKEN}" http://169.254.
 SUBNET_ID=$(curl -H "X-aws-ec2-metadata-token: ${TOKEN}" http://169.254.169.254/latest/meta-data/network/interfaces/macs/$(curl -H "X-aws-ec2-metadata-token: ${TOKEN}" http://169.254.169.254/latest/meta-data/mac)/subnet-id)
 
 # 조회된 메타데이터를 사용하여 index.html 생성
-# ${alb_address} 를 직접 찾아서 ALB URL 주소로 변경하세요. 
+# ${alb_address} 를 직접 찾아서 ALB URL 주소로 변경하세요.
 cat <<EOF > /var/www/html/index.html
 <html>
 <head>
 <title>EC2 Instance Meta-Data</title>
 </head>
 <body>
-<h1>Instance Information - WEB </h1>
+<h1>Instance Information</h1>
 <p>Instance ID: ${INSTANCE_ID}</p>
 <p>Availability Zone: ${AVAILABILITY_ZONE}</p>
 <p>Subnet ID: ${SUBNET_ID}</p>
@@ -253,19 +253,19 @@ switch (\$dbType) {
             <option value="aurora">Aurora</option>
             <option value="dynamodb">DynamoDB</option>
         </select><br><br>
-        
+
         <label for="dbHost">Database Host:</label>
         <input type="text" id="dbHost" name="dbHost"><br><br>
-        
+
         <label for="dbName">Database Name:</label>
         <input type="text" id="dbName" name="dbName"><br><br>
-        
+
         <label for="dbUser">Database User:</label>
         <input type="text" id="dbUser" name="dbUser"><br><br>
-        
+
         <label for="dbPassword">Database Password:</label>
         <input type="password" id="dbPassword" name="dbPassword"><br><br>
-        
+
         <input type="submit" value="Test Connection">
         <button type="submit" name="loadParams" value="true">Get Parameter</button>
     </form>

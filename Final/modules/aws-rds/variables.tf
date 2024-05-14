@@ -5,8 +5,8 @@ variable "private1-subnet-name2" {}
 variable "private2-subnet-name1" {}
 variable "private2-subnet-name2" {}
 variable "db-sg-name" {}
-variable "rds-username" {}
-variable "rds-pwd" {}
+#variable "rds-username" {}
+#variable "rds-pwd" {}
 variable "db-name" {}
 variable "rds1-name" {}
 variable "rds2-name" {}

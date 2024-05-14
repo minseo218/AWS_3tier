@@ -14,14 +14,20 @@ resource "aws_db_subnet_group" "db_subnet_group2" {
 data "aws_availability_zones" "available" {
   state = "available"
 }
+# RDS secret ( AWS Secrets Manager에서 시크릿 가져오기 )
+data "aws_secretsmanager_secret_version" "db_conn_info" {
+  secret_id = "3tier/db/conn_info"
+}
+
 
 #database instance#
 resource "aws_rds_cluster" "aurora_cluster" {
   cluster_identifier      = "aurora-serverless-cluster"
   engine                  = "aurora-mysql"
   engine_mode            = "serverless"
-  master_username         = var.rds-username
-  master_password         = var.rds-pwd
+  # secret 변수 할당
+  master_username         = jsondecode(data.aws_secretsmanager_secret_version.db_conn_info.secret_string)["username"]
+  master_password         = jsondecode(data.aws_secretsmanager_secret_version.db_conn_info.secret_string)["password"]
   backup_retention_period = 7
   preferred_backup_window = "07:00-09:00"
   skip_final_snapshot     = true
@@ -34,4 +40,11 @@ resource "aws_rds_cluster" "aurora_cluster" {
   tags = {
     Name = var.rds1-name
   }
+}
+
+# RDS 데이터베이스 엔드포인트 주소를 Parameter Store에 저장
+resource "aws_ssm_parameter" "rds_endpoint" {
+  name  = "/rds/aurora-serverless-cluster/endpoint"
+  type  = "String"
+  value = aws_rds_cluster.aurora_cluster.endpoint
 }

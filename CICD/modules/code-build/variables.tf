@@ -1,1 +1,0 @@
-variable "build_project_name" {}

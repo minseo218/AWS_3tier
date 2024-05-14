@@ -38,12 +38,30 @@ variable "DB-SG-NAME" {}
 # RDS
 variable "SG-NAME1" {}
 variable "SG-NAME2" {}
-variable "RDS-USERNAME" {}
-variable "RDS-PWD" {}
+#variable "RDS-USERNAME" {}
+#variable "RDS-PWD" {}
 variable "DB-NAME" {}
 variable "RDS1-NAME" {}
 variable "RDS2-NAME" {}
 
+## RDS secret ( AWS Secrets Manager에서 시크릿 가져오기 )
+#data "aws_secretsmanager_secret_version" "db_conn_info" {
+#  secret_id = "3tier/db/conn_info"
+#}
+#
+## 테라폼 변수에 시크릿 값 할당
+#locals {
+#  username = jsondecode(data.aws_secretsmanager_secret_version.db_conn_info)["username"]
+#  password = jsondecode(data.aws_secretsmanager_secret_version.db_conn_info)["password"]
+#}
+#
+#variable "RDS-USERNAME" {
+#  default = local.username
+#}
+#
+#variable "RDS-PWD" {
+#  default = local.password
+#}
 
 # ALB
 variable "WEB-TG-NAME" {}
